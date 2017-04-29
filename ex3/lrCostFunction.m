@@ -37,11 +37,15 @@ grad = zeros(size(theta));
 %
 
 
+temp = theta;
+temp(1) = 0;
+htheta = sigmoid(X * theta);
+costf = - (y .* log(htheta)) - ((1 - y) .* log(1 - htheta));
+Jpart = lambda / 2 / m * sum(temp .^ 2);
+J = sum(costf) / m + Jpart;
 
-
-
-
-
+gradpart = lambda / m * temp;
+grad = 1 / m * X' * (htheta - y) + gradpart;
 
 
 
